@@ -1,0 +1,46 @@
+{
+    "config": {
+        "encoding": {
+            "type": "jpeg",
+            "level": 95
+        },
+        "queue_size": 10,
+        "max_workers":4,
+        "udfs": [{
+            "name": "pcb.pcb_classifier",
+            "type": "python",
+            "ref_img": "common/video/udfs/python/pcb/ref/ref.png",
+            "ref_config_roi": "common/video/udfs/python/pcb/ref/roi_2.json",
+            "model_xml": "common/video/udfs/python/pcb/ref/model_2.xml",
+            "model_bin": "common/video/udfs/python/pcb/ref/model_2.bin",
+            "device": "CPU"
+        }]
+    },
+    "interfaces": {
+        "Subscribers": [
+            {
+                "Name": "default",
+                "Type": "zmq_ipc",
+                "EndPoint": "/EII/sockets",
+                "PublisherAppName": "VideoIngestion",
+                "Topics": [
+                    "camera1_stream"
+                ],
+                "zmq_recv_hwm": 50
+            }
+        ],
+        "Publishers": [
+            {
+                "Name": "default",
+                "Type": "zmq_tcp",
+                "EndPoint": "0.0.0.0:65013",
+                "Topics": [
+                    "camera1_stream_results"
+                ],
+                "AllowedClients": [
+                    "*"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "definitions": {},
+  "type": "object",
+  "required": [
+    "save_image",
+    "labels",
+    "draw_results"
+  ],
+  "properties": {
+    "save_image": {
+      "type": "string",
+      "pattern": "^(.*)$"
+    },
+    "labels": {
+      "type": "object"
+    },
+    "draw_results":{
+      "type": "string",
+      "default": "true"
+    }
+  }
+}
